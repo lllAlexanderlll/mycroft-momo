@@ -1,5 +1,5 @@
-# mycroft-medical-example
-A example skill to show, how easy it is to create dialogue with mycroft in a medical setting.
+# mycroft-momo
+Momo, our personal assisstant.
 
 To use this skill, use the following commands after each other: (on the device that runs mycroft)
 
