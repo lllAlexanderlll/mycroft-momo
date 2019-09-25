@@ -1,0 +1,15 @@
+intents:
+	HeyMomoInit
+	IdentificationOfUser
+	IntroductionofMomo
+	WelcomeMessage
+	getExistingInterestList
+	setInterestList
+	MeetSomeone
+	
+	Yes
+	No
+	Maybe --> Maybe --> Maybe --> Repeat
+	
+UserDatabase? or just one user?
+further: interestgroups with details
