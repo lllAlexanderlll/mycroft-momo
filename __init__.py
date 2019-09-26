@@ -19,7 +19,14 @@ class MomoSkill(MycroftSkill):
         
         # Initialize working variables used within the skill.
         self.iterests = ["card games", "sports", "movies", "reading", "walking", "gardening"]
-        
+    
+
+    def initialize(self):  
+        self.add_event('recognizer_loop:wakeword', self.handle_hey_momo)  
+
+    def handle_hey_momo(self, message):  
+        self.speak_dialog("Hey User!")
+
     @intent_handler(IntentBuilder("").require("test.intent"))
     def handle_test_intent(self, message):
         self.speak_dialog("test")
@@ -32,12 +39,6 @@ class MomoSkill(MycroftSkill):
     #         self.count -= 1
     #     self.speak_dialog("count.is.now", data={"count": self.count})
 
-    # The "stop" method defines what Mycroft does when told to stop during
-    # the skill's execution. In this case, since the skill's functionality
-    # is extremely simple, there is no need to override it.  If you DO
-    # need to implement stop, you should return True to indicate you handled
-    # it.
-    #
     def stop(self):
         self.speak_dialog("stop")
         return True
