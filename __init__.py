@@ -25,7 +25,7 @@ class MomoSkill(MycroftSkill):
         self.add_event('recognizer_loop:wakeword', self.handle_hey_momo)  
 
     def handle_hey_momo(self, message):  
-        self.speak_dialog("Hey User!")
+        self.speak_dialog("heyMomo")
 
     @intent_handler(IntentBuilder("").require("test.intent"))
     def handle_test_intent(self, message):
