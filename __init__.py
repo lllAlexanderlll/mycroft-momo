@@ -10,6 +10,7 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
+import os
 import sqlite3
 from sqlite3 import Error
 
@@ -19,7 +20,7 @@ class MomoSkill(MycroftSkill):
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(MomoSkill, self).__init__(name="Momo")
-        with open("data/interests") as f:
+        with open(os.path.join(os.path.dirname(__file__), "data/interests")) as f:
             self.interests = f.readlines()
          
         self.userInterestsDict = {
