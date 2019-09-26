@@ -38,9 +38,20 @@ class MomoSkill(MycroftSkill):
 
     def handle_hey_momo(self, message):
         self.speak_dialog("placeBracelet")
+        print("Got this message: {}".format(message))
+
+        self.gui["time_string"] = "bla"
+        self.gui.show_page("clock_face.qml")
+        
+
         #self.username = input("Please write your forename: ")
-        self.username = "Hans"
-        if self.username in self.userInterestsDict.keys():
+        self.isUserKnown = False
+        for username in userInterestsDict.keys():
+            if message in username:
+                self.username = username
+                self.isUserKnown = True
+
+        if self.isUserKnown:
             self.speak_dialog("Hi {}, these are your interests: {}".format(self.username, self.userInterestsDict[self.username]))
         else:
             #ask user for interests
