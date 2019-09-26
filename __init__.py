@@ -30,7 +30,7 @@ class MomoSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("test.intent"))
     def handle_test_intent(self, message):
-        print("this is python3")
+        print 123
         self.speak_dialog("test")
 
 
