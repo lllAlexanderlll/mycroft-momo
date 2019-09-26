@@ -44,12 +44,18 @@ body{
 .content{
     width: 69%;
     display: inline-block;
+    box-sizing: border-box;
+
 }
 
 .bubble{
-    border-radius: 10px 10px 10px 0px;
-    background-color: red;
-    padding: 10px;
-    color: white;
-    font-size: 33px;
+    border-radius: 50px 50px 50px 0px;
+    background-color: #ffdfc6;
+    padding: 30px 50px 30px 50px;
+    color: #262626    ;
+    font-size: 35px;
+    width: 100%;
+    margin: 20px;
+    font-weight: 600;
+    box-sizing: border-box;
 }
