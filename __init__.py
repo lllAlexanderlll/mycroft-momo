@@ -39,10 +39,8 @@ class MomoSkill(MycroftSkill):
     def handle_hey_momo(self, message):
         self.speak_dialog("placeBracelet")
         print("Got this message: {}".format(message))
-
         self.gui["time_string"] = "bla"
-        self.gui.show_page("clock_face.qml")
-        
+        self.gui.show_page(os.path.join(os.path.dirname(__file__), "ui/clock_face.qml"))
 
         #self.username = input("Please write your forename: ")
         self.isUserKnown = False
