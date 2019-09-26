@@ -10,27 +10,46 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
+import sqlite3
+from sqlite3 import Error
 
 class MomoSkill(MycroftSkill):
+
 
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(MomoSkill, self).__init__(name="Momo")
-        
-        # Initialize working variables used within the skill.
-        self.iterests = ["card games", "sports", "movies", "reading", "walking", "gardening"]
+        with open("data/interests") as f:
+            self.interests = f.readlines()
+         
+        self.userInterestsDict = {
+            "Hans": ["Fishing", "Cooking", "Walking"],
+            "Maria": ["Movies", "Gardening"]
+        }
+
+        self.eventInterest = {
+            "Cooking": "Cooking class",
+            "Walking": "Going to the park"
+        }
+    
     
 
     def initialize(self):  
         self.add_event('recognizer_loop:wakeword', self.handle_hey_momo)  
 
     def handle_hey_momo(self, message):
-        self.speak_dialog("heyMomo")
-
-
+        self.speak_dialog("placeBracelet")
+        self.username = input("Please write your forename: ")
+        if self.username in self.userInterestsDict.keys():
+            self.speak_dialog("Hi {}, these are your interests: {}".format(self.username, self.userInterestsDict[self.username]))
+        else:
+            #ask user for interests
+            self.speak_dialog("What are you interested in? Choose from the listed interests!")
+            # goto getInterestsIntent
+            # self.userInterestsDict[self.username] = 
+            
     @intent_handler(IntentBuilder("").require("test.intent"))
     def handle_test_intent(self, message):
-        print 123
         self.speak_dialog("test")
 
 
