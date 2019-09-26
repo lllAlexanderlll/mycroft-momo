@@ -1,15 +1,43 @@
 intents:
 	HeyMomoInit
+		utterance: "Hey Momo", but nothing more
+		so detect that and forward to the IdentificationOfUser
 	IdentificationOfUser
+		*user identifies himself* --> known user? yes: PersonalWelcomeMessage no: IntroductionofMomo
 	IntroductionofMomo
-	WelcomeMessage
-	getExistingInterestList
+		bla bla bla --> setInterestList
+	PersonalWelcomeMessage
+		Hi, Hans! --> MeetSomeone
+	getInterestList
 	setInterestList
+		What are you interested in? Here is a list of suggestions: *see display*, name a few (randomly)
 	MeetSomeone
+		Wanna join Emmas Reading Club? Then go to the reading area at 5pm.
 	
 	Yes
 	No
-	Maybe --> Maybe --> Maybe --> Repeat
-	
-UserDatabase? or just one user?
-further: interestgroups with details
+	Maybe --> Maybe --> Maybe --> Repeat last spoken words (how?)
+
+What is needed?
+	* State variables: {user1 => [interests]}
+	* The dialog between user and Momo (intents and stuff)
+	* A dynamic list of known interests among all users (DB or filebased?)
+	* A list (just some exampled) for events regarding specific interests e.g. reading => "name: Emmas Reading Club, time: 5pm, description: "...""
+	* (A description of the event, if time)
+
+What Fallback skills are needed? What is already handled by mycroft itself?
+	User says nothing
+	User says too much
+	User says corrects him/herself
+
+Context Functionality --> remeber the user name and his/her interests as a context variable (dictionary)
+Why not just use state variables?!
+https://mycroft-ai.gitbook.io/docs/skill-development/next-steps/conversational-context
+
+Is SkillsSetting needed? i.e. default values for stuff
+
+Use display with: https://mycroft.ai/blog/the-mycroft-gui-the-screen-is-dead-long-live-the-screen/
+	need to change the enclousure? Have a look into "mycroft.conf"
+OR
+MessageBus to incorporate a local webserver: https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/message-bus
+	every time our skill says something it get pushed as "skill.skillname.message"
