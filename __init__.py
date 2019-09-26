@@ -32,14 +32,13 @@ class MomoSkill(MycroftSkill):
             "Walking": "Going to the park"
         }
     
-    
-
     def initialize(self):  
-        self.add_event('recognizer_loop:wakeword', self.handle_hey_momo)  
+        self.add_event('recognizer_loop:wakeword', self.handle_hey_momo)
 
     def handle_hey_momo(self, message):
         self.speak_dialog("placeBracelet")
-        self.username = input("Please write your forename: ")
+        #self.username = input("Please write your forename: ")
+        self.username = "Hans"
         if self.username in self.userInterestsDict.keys():
             self.speak_dialog("Hi {}, these are your interests: {}".format(self.username, self.userInterestsDict[self.username]))
         else:
