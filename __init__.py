@@ -29,11 +29,9 @@ class MomoSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("test.intent"))
     def handle_test_intent(self, message):
-        self.gui["test_string"] = self.
-        self.gui.show_page("clock_face.qml")
         self.speak_dialog("test")
-        self.register_vocabulary("TestWordA", "test")
-        self.register_vocabulary("TestWordB", "test.intent")
+        self.register_vocabulary("TestWordA", "interests")
+        self.register_vocabulary("TestWordB", "interests.voc")
 
     # @intent_handler(IntentBuilder("").require("Count").require("Dir"))
     # def handle_count_intent(self, message):
