@@ -276,15 +276,14 @@
         $(document).ready(function() {
             setInterval(ajaxd, 1000);
         });
-
+        oldMessage = "";
         function ajaxd() { 
             $.ajax({
                 url: "http://localhost:5000/message",
                 type: 'GET',
                 success: function(message) {
-                    console.log(message);
-                    alert(message);
-                    displayMessageFromUser(message);
+                    if(oldMessage !== message)
+                        displayMessageFromUser(message);
                 }
             });
         }
