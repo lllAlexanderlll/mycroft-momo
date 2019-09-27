@@ -8,6 +8,8 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/all.css" rel="stylesheet" type="text/css">
     <script src="js/typed.11"></script>
+    <script src="js/jquery.min.js"></script>
+
 
 </head>
 
@@ -92,16 +94,16 @@
                     opacity="1" fill="#ffffff" />
             </g>
             <g id="Layer 6_2" vectornator:layerName="Layer 6">
-                <path 
+                <path
                     d="M688.844+426.948C688.844+376.598+729.66+335.781+780.011+335.781C830.361+335.781+871.178+376.598+871.178+426.948C871.178+477.298+830.361+518.115+780.011+518.115C729.66+518.115+688.844+477.298+688.844+426.948Z"
                     opacity="1" fill="#ffffff" />
                 <path
                     d="M688.844+426.948C688.844+376.598+729.66+335.781+780.011+335.781C830.361+335.781+871.178+376.598+871.178+426.948C871.178+477.298+830.361+518.115+780.011+518.115C729.66+518.115+688.844+477.298+688.844+426.948Z"
                     opacity="1" fill="#ffffff" />
-                <path 
+                <path
                     d="M688.844+426.948C688.844+376.598+729.66+335.781+780.011+335.781C830.361+335.781+871.178+376.598+871.178+426.948C871.178+477.298+830.361+518.115+780.011+518.115C729.66+518.115+688.844+477.298+688.844+426.948Z"
                     opacity="1" fill="#ffffff" />
-                <path 
+                <path
                     d="M436.266+464.81C436.266+414.46+477.083+373.643+527.433+373.643C577.783+373.643+618.6+414.46+618.6+464.81C618.6+515.16+577.783+555.977+527.433+555.977C477.083+555.977+436.266+515.16+436.266+464.81Z"
                     opacity="1" fill="#ffffff" />
                 <path
@@ -144,7 +146,7 @@
                     fill="none" stroke-linecap="round" opacity="1" stroke-linejoin="round" />
             </g>
         </svg>
-
+        <a href="#" onclick="displayMessageFromUser('hello')">Append</a>
     </div>
     <div class="content">
         <div class="bubble left">
@@ -189,13 +191,69 @@
             </div>
         </div>
     </div>
-    <script>
-        var typed = new Typed('#typed', {
-            typeSpeed: 50,
-            stringsElement: '#typed-strings',
-            smartBackspace: false,
-            shuffle: false,
 
+    <script>
+
+        function displayMessage(type, message) {
+            if (type === 1) {
+                displayMessageFromUser(message);
+            } else if (type === 2) {
+                displayMessageFromMycroft(message);
+            }
+        }
+
+        function typeIt() {
+            var typed = new Typed('#typed', {
+                typeSpeed: 50,
+                stringsElement: '#typed-strings',
+                smartBackspace: false,
+                shuffle: false,
+            });
+            $("#typed").removeAttr('id');
+            $("#typed-strings").removeAttr('id');
+        }
+
+        function displayMessageFromUser(message) {
+            var newRow = document.createElement("div"),
+                newBubble = document.createElement("div"),
+                typedSpan = document.createElement("span"),
+                newText = document.createElement("div");
+            content = document.createElement("p");
+            newRow.classList.add("bubble");
+            newRow.classList.add("left");
+            newBubble.classList.add("bubble-momo");
+            newBubble.classList.add("bubble-general");
+            newText.id = "typed-strings";
+            typedSpan.id = "typed";
+            content.innerHTML = message;
+            newText.appendChild(content);
+            newBubble.appendChild(newText);
+            newBubble.appendChild(typedSpan);
+            newRow.appendChild(newBubble);
+
+            $(".content").prepend(newRow);
+            typeIt();
+        }
+
+        function displayMessageFromMycroft(message) {
+
+        }
+
+        $(document).change(function () {
+            // find new element
+            var newbie = $(".newbie");
+
+            $('.content').animate({
+                scrollTop: $(newbie).offset().top
+            }, 800, function () {
+            });
+        });
+    </script>
+
+
+
+    <script>
+        $(document).change(function () {
 
         });
     </script>
