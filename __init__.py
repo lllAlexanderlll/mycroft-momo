@@ -35,7 +35,7 @@ class MomoSkill(MycroftSkill):
         self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
     def handle_utterance(self, data):
-      self.speak_dialog(data["utterances"][0])
+      self.speak_dialog(data.data)
     
         #self.username = input("Please write your forename: ")
         
