@@ -44,37 +44,37 @@ class MomoSkill(MycroftSkill):
     def initialize(self):  
         self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
-    def handle_utterance(self, data):
-        message = data.data["utterances"][0]
-        self.speak_dialog(message)
-        with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
-            f.truncate(0)
-            f.write(message)
+    # def handle_utterance(self, data):
+    #     message = data.data["utterances"][0]
+    #     self.speak_dialog(message)
+    #     with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
+    #         f.truncate(0)
+    #         f.write(message)
     
-    def getRandomDialogEntryOrTheText(self, dialogOrText):
-        p = os.path.join("/opt/mycroft/skills/mycroft-momo/dialog/en-us/" + dialogOrText[:-4])
-        if(os.path.exists(p)):
-            return random_line(p)
-        else:
-            return dialogOrText
+    # def getRandomDialogEntryOrTheText(self, dialogOrText):
+    #     p = os.path.join("/opt/mycroft/skills/mycroft-momo/dialog/en-us/" + dialogOrText[:-4])
+    #     if(os.path.exists(p)):
+    #         return random_line(p)
+    #     else:
+    #         return dialogOrText
 
-    def showDialog(self, dialogOrText):
-        text = self.getRandomDialogEntryOrTheText(dialogOrText)
-        with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
-            f.truncate(0)
-            f.write(text)
-        return text
+    # def showDialog(self, dialogOrText):
+    #     text = self.getRandomDialogEntryOrTheText(dialogOrText)
+    #     with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
+    #         f.truncate(0)
+    #         f.write(text)
+    #     return text
 
-    def showAndSpeakDialog(self, dialog, waitForResponse=False):
-        text = self.getRandomDialogEntryOrTheText(dialog)
-        self.showDialog(text)
-        self.speak(text, waitForResponse)
+    # def showAndSpeakDialog(self, dialog, waitForResponse=False):
+    #     text = self.getRandomDialogEntryOrTheText(dialog)
+    #     self.showDialog(text)
+    #     self.speak(text, waitForResponse)
 
-    def showAndSpeakDialogResponse(self, dialog):
-        text = self.getRandomDialogEntryOrTheText(dialog)
-        self.showDialog(text)
-        response = self.get_response(text)
-        return response
+    # def showAndSpeakDialogResponse(self, dialog):
+    #     text = self.getRandomDialogEntryOrTheText(dialog)
+    #     self.showDialog(text)
+    #     response = self.get_response(text)
+    #     return response
 
     def get_user_response(self, dialog):
         response = self.get_response(dialog)
@@ -83,8 +83,8 @@ class MomoSkill(MycroftSkill):
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.username = self.get_user_response('who.is.there')
-        self.showDialog("who.is.there")
-        self.speak_dialog("welcome.back", data={"username" : self.username})
+        # self.showDialog("who.is.there")
+        # self.speak_dialog("welcome.back", data={"username" : self.username})
         # utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
         # self.showDialog(utterance)
 
