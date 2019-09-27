@@ -68,14 +68,19 @@ class MomoSkill(MycroftSkill):
         self.showDialog(text)
         self.speak(text, waitForResponse)
 
+    def showAndSpeakDialogResponse(self, dialog, waitForResponse=False):
+        text = self.getRandomDialogEntryOrTheText(dialog)
+        self.showDialog(text)
+        response = self.get_response(text)
+        return response
+
     def get_user_response(self, dialog):
         response = self.get_response(dialog)
         return response
 
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
-        self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
-        username = self.get_user_response("test")
+        username = self.showAndSpeakDialogResponse("Hey! Do we know each other? What is your name?")
         if(username in self.userInterestsDict.keys()):
             self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(username))
             for interest in self.userInterestsDict[username]:
