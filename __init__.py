@@ -41,15 +41,20 @@ class MomoSkill(MycroftSkill):
         with open('/opt/mycroft/skills/mycroft-momo/userMessage', 'a') as f:
             f.truncate(0)
             f.write(message)
-        #self.username = input("Please write your forename: ")
-        
+    
+    def showAndSpeakDialog(self, dialog):
+        with open('/opt/mycroft/skills/mycroft-momo/momoMessage', 'a') as f:
+            f.truncate(0)
+            f.write(dialog)
+        self.speak_dialog(dialog)
+
             
     @intent_handler(IntentBuilder("").require("hey.intent"))
     def handle_test_intent(self, message):
-        self.speak_dialog("placeBracelet")
+        self.showAndSpeakDialog("placeBracelet")
 
     def stop(self):
-        self.speak_dialog("stop")
+        self.showAndSpeakDialog("stop")
         return True
 
 # The "create_skill()" method is used to create an instance of the skill.

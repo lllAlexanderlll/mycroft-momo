@@ -11,10 +11,17 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
 
-@app.route('/message', methods=['GET'])
-def get_message():
+@app.route('/user/message', methods=['GET'])
+def get_user_message():
 	message = ""
-	with open('/opt/mycroft/skills/mycroft-momo/userMessage', 'r') as f:
+	with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'r') as f:
+		message = f.read()
+	return message
+
+@app.route('/momo/message', methods=['GET'])
+def get_user_message():
+	message = ""
+	with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'r') as f:
 		message = f.read()
 	return message
 
