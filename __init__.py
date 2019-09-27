@@ -36,8 +36,8 @@ class MomoSkill(MycroftSkill):
         }
 
         self.eventInterest = {
-            "Cooking": "Cooking class",
-            "Walking": "Going to the park"
+            "Cooking": ["Cooking class"]
+            "Walking": ["Going to the park", "Walking around the hospital"]
         }
 
     
@@ -63,14 +63,33 @@ class MomoSkill(MycroftSkill):
         else:
             return dialogOrText
 
-    def showAndSpeakDialog(self, dialog):
+    def showAndSpeakDialog(self, dialog, waitForResponse=False):
         text = getRandomDialogEntryOrTheText(dialog)
         self.showDialog(text)
-        self.speak(text)
+        self.speak(text, waitForResponse)
 
-    @intent_handler(IntentBuilder("").require("hey.intent"))
+    @adds_context("usernameIsKnown")
+    @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
+        username = self.get_response()
+        self.set_context('username', username)
+        if(username in userInterestsDict.keys()):
+            self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(username))
+            for interest in userInterestsDict[username]:
+                if(interest in self.eventInterest.keys()):
+                    self.showAndSpeakDialog("{}: {}".format(interest, self.eventInterest[interest]))
+            self.showAndSpeakDialog("What do you want to do?")
+        else:
+            self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(username))
+            self.showDialog("showSuggestedInterests123456")
+    
+    @removes_context('usernameIsKnown')
+    @intent_handler(IntentBuilder(""))
+    def handle_wouldYouLikeHelp_intent(self, message):
+        pass
+        
+
 
 
     # def stop(self):
