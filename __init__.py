@@ -71,7 +71,7 @@ class MomoSkill(MycroftSkill):
     def showAndSpeakDialogResponse(self, dialog, waitForResponse=False):
         text = self.getRandomDialogEntryOrTheText(dialog)
         self.showDialog(text)
-        response = self.get_user_response(text)
+        response = self.get_response(text)
         return response
 
     def get_user_response(self, dialog):
