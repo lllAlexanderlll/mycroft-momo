@@ -55,15 +55,23 @@ body{
     overflow: scroll;
 }
 
+.bubble-general{
+    font-weight: 600;
+
+    padding: 30px 50px 30px 50px;
+    font-size: 35px;
+    color: #262626    ;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-bottom: 20px;    
+
+
+
+}
+
 .bubble-momo{
     border-radius: 50px 50px 50px 0px;
     background-color: #e9d5ff;
-    padding: 30px 50px 30px 50px;
-    color: #262626    ;
-    font-size: 35px;
-    margin: 20px;
-    font-weight: 600;
-    box-sizing: border-box;
 }
 
 .bubble{
@@ -83,15 +91,19 @@ body{
 }
 
 .bubble-green{
-    border-radius: 50px 50px 0px 50px;
     background-color: #b8e986;
-    padding: 30px 50px 30px 50px;
-    color: #262626;
-    font-size: 35px;
-    font-weight: 600;
-    box-sizing: border-box;
-    display: inline-block;
-    margin-bottom: 20px;    
+    border-radius: 50px 50px 0px 50px;
+
+
+
+
+
+}
+
+.bubble-user{
+    background-color: #ffdc92;
+    border-radius: 50px 50px 0px 50px;
+
 
 }
 

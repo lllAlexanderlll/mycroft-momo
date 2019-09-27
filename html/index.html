@@ -148,7 +148,7 @@
     </div>
     <div class="content">
         <div class="bubble left">
-            <div class="bubble-momo">
+            <div class="bubble-momo bubble-general">
 
                 <div id="typed-strings">
                     <p>Hey, I am Momo!</p>
@@ -159,7 +159,8 @@
         </div>
 
         <div class="bubble right">
-            <div class="bubble-green">
+            <div class="bubble-user bubble-general">
+                <!--Loading animation-->
                 <div class="lds-ripple">
                     <div></div>
                     <div></div>
@@ -167,36 +168,37 @@
             </div>
         </div>
 
-        <div class="bubble right">
-            <div class="bubble-green">
+        <div class="bubble right ">
+            <div class="bubble-green bubble-general">
                 <i class="fas fa-check"></i>
             </div>
-            <div class="bubble right">
-                <div class="bubble-green">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="bubble right">
-                    <div class="bubble-green">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="bubble right">
-                        <div class="bubble-green">
-                            <i class="fas fa-check"></i>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="bubble right ">
+            <div class="bubble-green bubble-general">
+                <i class="fas fa-check"></i>
             </div>
         </div>
-        <script>
-            var typed = new Typed('#typed', {
-                typeSpeed: 50,
-                stringsElement: '#typed-strings',
-                smartBackspace: false,
-                shuffle: false,
+        <div class="bubble right ">
+            <div class="bubble-green bubble-general">
+                <i class="fas fa-check"></i>
+            </div>
+        </div>
+        <div class="bubble right ">
+            <div class="bubble-user bubble-general">
+                <p>I like football</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var typed = new Typed('#typed', {
+            typeSpeed: 50,
+            stringsElement: '#typed-strings',
+            smartBackspace: false,
+            shuffle: false,
 
 
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
