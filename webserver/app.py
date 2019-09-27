@@ -8,7 +8,7 @@ def get_message():
 	message = ""
 	with open('newMessage', 'r') as f:
 		message = f.read()
-    return message
+	return message
 
 if __name__ == '__main__':
     app.run(debug=True)
