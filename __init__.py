@@ -8,7 +8,7 @@
 # when the skill gets installed later by a user.
 
 from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill, intent_handler, Message
+from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
 import os
 import random
