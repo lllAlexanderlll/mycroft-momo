@@ -39,7 +39,7 @@ class MomoSkill(MycroftSkill):
         message = data.data["utterances"][0]
         self.speak_dialog(message)
         with open('/opt/mycroft/skills/mycroft-momo/newMessage', 'a') as f:
-            f.seek(0)
+            f.truncate(0)
             f.write(message)
         #self.username = input("Please write your forename: ")
         
