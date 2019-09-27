@@ -52,7 +52,7 @@ class MomoSkill(MycroftSkill):
             f.write(message)
 
     def showDialog(self, dialog):
-        with open('/opt/mycroft/skills/mycroft-momo/momo/messages/momoMessage', 'a') as f:
+        with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
             f.truncate(0)
             f.write(dialog)
 
