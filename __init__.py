@@ -83,15 +83,13 @@ class MomoSkill(MycroftSkill):
         else:
             self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(username))
             self.showDialog("showSuggestedInterests123456")
+            #self.userInterestsDict[username] = newUsersInterests
     
     @removes_context('usernameIsKnown')
     @intent_handler(IntentBuilder(""))
     def handle_wouldYouLikeHelp_intent(self, message):
         pass
         
-
-
-
     # def stop(self):
     #     self.showAndSpeakDialog("stop")
     #     return True
