@@ -11,11 +11,6 @@ from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler, Message
 from mycroft.util.log import LOG
 import os
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-
-
 
 class MomoSkill(MycroftSkill):
 
@@ -40,11 +35,12 @@ class MomoSkill(MycroftSkill):
     def initialize(self):  
         self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
-    @app.route('/message', methods=['GET'])
     def handle_utterance(self, data):
         message = data.data["utterances"][0]
         self.speak_dialog(message)
-        return message
+        with open('newMessage', 'a') as f:
+            f.seek(0)
+            f.write(message)
         #self.username = input("Please write your forename: ")
         
             
@@ -60,5 +56,3 @@ class MomoSkill(MycroftSkill):
 # Note that it's outside the class itself.
 def create_skill():
     return MomoSkill()
-
-app.run(debug=True)
