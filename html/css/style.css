@@ -35,10 +35,12 @@ body{
 }
 
 .momo{
-    position: relative;
+    position: fixed;
+    left: 0;
+    top: 0;
     width:30%;
     display: inline-block;
-    float: left;
+
 }
 
 .content{
@@ -46,7 +48,11 @@ body{
     display: inline-block;
     box-sizing: border-box;
     padding: 30px;
-    float: left;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    overflow: scroll;
 }
 
 .bubble-momo{
@@ -85,6 +91,8 @@ body{
     font-weight: 600;
     box-sizing: border-box;
     display: inline-block;
+    margin-bottom: 20px;    
+
 }
 
 
