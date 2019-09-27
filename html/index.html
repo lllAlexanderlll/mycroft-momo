@@ -282,7 +282,8 @@
                 url: "http://localhost:5000/message",
                 type: 'GET',
                 success: function(message) {
-                    if(oldMessage !== message){
+                    if(oldMessage != message){
+                        oldMessage = message;
                         displayMessageFromUser(message);
                     }
                 }
