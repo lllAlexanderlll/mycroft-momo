@@ -61,4 +61,5 @@ class MomoSkill(MycroftSkill):
 def create_skill():
     return MomoSkill()
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
