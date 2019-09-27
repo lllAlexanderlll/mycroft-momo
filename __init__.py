@@ -13,6 +13,8 @@ from mycroft.util.log import LOG
 import os
 from flask import Flask, jsonify
 
+app = Flask(__name__)
+
 
 
 class MomoSkill(MycroftSkill):
@@ -36,8 +38,6 @@ class MomoSkill(MycroftSkill):
 
     
     def initialize(self):  
-        app = Flask(__name__)
-        app.run(debug=True)
         self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
     @app.route('/message', methods=['GET'])
@@ -60,3 +60,5 @@ class MomoSkill(MycroftSkill):
 # Note that it's outside the class itself.
 def create_skill():
     return MomoSkill()
+
+app.run(debug=True)
