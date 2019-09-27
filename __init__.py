@@ -27,6 +27,7 @@ class MomoSkill(MycroftSkill):
     def __init__(self):
         super(MomoSkill, self).__init__(name="Momo")
 
+        self.username = None
         with open(os.path.join(os.path.dirname(__file__), "data/interests")) as f:
             self.interests = f.readlines()
          
@@ -81,22 +82,18 @@ class MomoSkill(MycroftSkill):
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.showAndSpeakDialogResponse("Hey! Do we know each other? What is your name?")
-        username = self.get_user_response("names.small")
-        if(username in self.userInterestsDict.keys()):
-            self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(username))
-            for interest in self.userInterestsDict[username]:
+        self.username = self.get_user_response("names.small")
+        if(self.username in self.userInterestsDict.keys()):
+            self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(self.username))
+            for interest in self.userInterestsDict[self.username]:
                 if(interest in self.eventInterest.keys()):
                     self.showAndSpeakDialog("{}: {}".format(interest, self.eventInterest[interest]))
             self.showAndSpeakDialog("What do you want to do?")
         else:
-            self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(username))
+            self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(self.username))
             self.showDialog("showSuggestedInterests123456")
             #self.userInterestsDict[username] = newUsersInterests
     
-    @intent_handler(IntentBuilder("bla"))
-    def handle_wouldYouLikeHelp_intent(self, message):
-        pass
-        
     # def stop(self):
     #     self.showAndSpeakDialog("stop")
     #     return True
