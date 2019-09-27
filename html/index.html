@@ -50,7 +50,7 @@
                     d="M614.457+1178.51C614.457+1178.51+642.504+1158.53+705.609+1178.16" fill="#ed2736"
                     stroke-linecap="round" opacity="1" stroke-linejoin="round" />
             </g>
-            <g id="rotating" vectornator:layerName="Layer 3">
+            <g class="rotating" id="rotating" vectornator:layerName="Layer 3">
                 <path
                     d="M1188.85+410.294C1188.85+410.294+869.976+357.335+757.287+649.974C757.287+649.974+1112.12+526.001+1188.85+410.294Z"
                     opacity="0" fill="#ed2736" />
@@ -146,10 +146,17 @@
                     fill="none" stroke-linecap="round" opacity="1" stroke-linejoin="round" />
             </g>
         </svg>
+        <h1>MoMo the Friend Seeker</h1>
+        <h2>VIVA2019</h2>
+        <p></p>
         <a href="#" onclick="displayMessageFromMycroft('hello')">Append</a>
         <a href="#" onclick="displayMessageFromUser('Oh I love you Momo')">Message from user</a>
         <a href="#" onclick="displayWaitingMessage()">Waiting</a>
         <a href="#" onclick="deleteWaitingMessage()">Remove waiting</a>
+        <a href="#" onclick="startWingAnimation()">StartWingAnimation</a>
+        <a href="#" onclick="stopWingAnimation()">StopWingAnimation</a>
+
+
 
 
 
@@ -181,10 +188,17 @@
                 <i class="fas fa-check"></i>
             </div>
         </div>
-        <div class="bubble right ">
-            <div class="bubble-green bubble-general">
-                <i class="fas fa-check"></i>
+        <div class="bubble left ">
+            <div class="interests">
+                <div class="header">Interests</div>
+                <ul>
+                    <li>Football</li>
+                    <li>Knitting</li>
+                    <li>Dogs</li>
+                    <li>Lol</li>
+                </ul>
             </div>
+
         </div>
         <div class="bubble right ">
             <div class="bubble-green bubble-general">
@@ -230,6 +244,15 @@
 
         function displayWaitingMessage() {
             $(".content").prepend(waitingBubble);
+        }
+
+
+        function startWingAnimation() {
+            $("#rotating").addClass("rotating");
+        }
+
+        function stopWingAnimation() {
+            $("#rotating").removeClass("rotating");
         }
 
         function deleteWaitingMessage() {
