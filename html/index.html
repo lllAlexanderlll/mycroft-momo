@@ -146,7 +146,9 @@
                     fill="none" stroke-linecap="round" opacity="1" stroke-linejoin="round" />
             </g>
         </svg>
-        <a href="#" onclick="displayMessageFromUser('hello')">Append</a>
+        <a href="#" onclick="displayMessageFromMycroft('hello')">Append</a>
+        <a href="#" onclick="displayMessageFromUser('Oh I love you Momo')">Message from user</a>
+
     </div>
     <div class="content">
         <div class="bubble left">
@@ -208,12 +210,13 @@
                 stringsElement: '#typed-strings',
                 smartBackspace: false,
                 shuffle: false,
+                showCursor: false,
             });
             $("#typed").removeAttr('id');
             $("#typed-strings").removeAttr('id');
         }
 
-        function displayMessageFromUser(message) {
+        function displayMessageFromMycroft(message) {
             var newRow = document.createElement("div"),
                 newBubble = document.createElement("div"),
                 typedSpan = document.createElement("span"),
@@ -235,8 +238,26 @@
             typeIt();
         }
 
-        function displayMessageFromMycroft(message) {
+        function displayMessageFromUser(message) {
+            var newRow = document.createElement("div"),
+                newBubble = document.createElement("div"),
+                typedSpan = document.createElement("span"),
+                newText = document.createElement("div");
+            content = document.createElement("p");
+            newRow.classList.add("bubble");
+            newRow.classList.add("right");
+            newBubble.classList.add("bubble-user");
+            newBubble.classList.add("bubble-general");
+            newText.id = "typed-strings";
+            typedSpan.id = "typed";
+            content.innerHTML = message;
+            newText.appendChild(content);
+            newBubble.appendChild(newText);
+            newBubble.appendChild(typedSpan);
+            newRow.appendChild(newBubble);
 
+            $(".content").prepend(newRow);
+            typeIt();
         }
 
         $(document).change(function () {
@@ -249,8 +270,6 @@
             });
         });
     </script>
-
-
 
     <script>
         $(document).change(function () {
