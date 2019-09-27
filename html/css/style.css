@@ -107,8 +107,10 @@ body{
 .bubble-user{
     background-color: #ffdc92;
     border-radius: 50px 50px 0px 50px;
+}
 
-
+.bubble-user p{
+    text-align: left;
 }
 
 
