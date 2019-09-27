@@ -1,6 +1,10 @@
 /* 
     Author     : Dominika Palivcová
 */
+
+html {
+    scroll-behavior: smooth;
+  }
 *{
     margin: 0;
     padding: 0;
@@ -61,7 +65,7 @@ body{
     padding: 30px 50px 30px 50px;
     font-size: 35px;
     color: #262626    ;
-    box-sizing: border-box;
+        box-sizing: border-box;
     display: inline-block;
     margin-bottom: 20px;    
 
@@ -113,6 +117,12 @@ span.emph{
     font-weight: 1000;
 }
 
+#rotating{
+    -webkit-animation: rotate-a-bit 0.9s ease-in-out infinite;
+    animation: rotate-a-bit 0.9s ease-in-out infinite;
+}
+
+
 
 .lds-ripple {
     display: inline-block;
@@ -146,3 +156,47 @@ span.emph{
       opacity: 0;
     }
   }
+
+  @-webkit-keyframes rotate-a-bit {
+    0% {
+        -webkit-transform: rotate(0);
+                transform: rotate(0);
+      }
+      30% {
+        -webkit-transform: rotate(1deg);
+                transform: rotate(1deg);
+      }
+      70% {
+          -webkit-transform: rotate(-1deg);
+                  transform: rotate(-1deg);
+        }
+        100% {
+          -webkit-transform: rotate(0deg);
+                  transform: rotate(0deg);
+        }
+  }
+  @keyframes rotate-a-bit {
+    0% {
+        -webkit-transform: rotate(0);
+                transform: rotate(0);
+      }
+      30% {
+        -webkit-transform: rotate(1deg);
+                transform: rotate(1deg);
+      }
+      70% {
+          -webkit-transform: rotate(-1deg);
+                  transform: rotate(-1deg);
+        }
+        100% {
+          -webkit-transform: rotate(0deg);
+                  transform: rotate(0deg);
+        }
+    
+  }
+  
+
+  .faded{
+      opacity: 0.4;
+  }
+
