@@ -84,8 +84,9 @@ class MomoSkill(MycroftSkill):
     def handle_start_intent(self, message):
         self.username = self.get_user_response('who.is.there')
         self.showDialog("who.is.there")
-        utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
-        self.showDialog(utterance)
+        self.speak_dialog("welcome.back", data={"username" : self.username})
+        # utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
+        # self.showDialog(utterance)
 
         # if(self.username in self.userInterestsDict.keys()):
         #     utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
