@@ -47,12 +47,12 @@ class MomoSkill(MycroftSkill):
     def handle_utterance(self, data):
         message = data.data["utterances"][0]
         self.speak_dialog(message)
-        with open('/opt/mycroft/skills/mycroft-momo/userMessage', 'a') as f:
+        with open('/opt/mycroft/skills/mycroft-momo/user/message', 'a') as f:
             f.truncate(0)
             f.write(message)
 
     def showDialog(self, dialog):
-        with open('/opt/mycroft/skills/mycroft-momo/momoMessage', 'a') as f:
+        with open('/opt/mycroft/skills/mycroft-momo/momo/message', 'a') as f:
             f.truncate(0)
             f.write(dialog)
 
@@ -68,11 +68,14 @@ class MomoSkill(MycroftSkill):
         self.showDialog(text)
         self.speak(text, waitForResponse)
 
-    
+    def get_user_response(self, dialog):
+        response = self.get_response(dialog)
+        return response
+
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
-        username = self.get_response("test")
+        username = self.get_user_response("test")
         if(username in self.userInterestsDict.keys()):
             self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(username))
             for interest in self.userInterestsDict[username]:
