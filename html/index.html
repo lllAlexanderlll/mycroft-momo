@@ -269,6 +269,15 @@
             }, 800, function () {
             });
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            setInterval(ajaxd, 1000);
+        });
+
+        function ajaxd() { 
             $.ajax({
                 url: "http://localhost:5000/message",
                 type: 'GET',
@@ -278,13 +287,8 @@
                     displayMessageFromUser(message);
                 }
             });
-        });
-    </script>
-
-    <script>
-        $(document).change(function () {
-
-        });
+        }
+ 
     </script>
 </body>
 
