@@ -14,7 +14,7 @@ def after_request(response):
 @app.route('/message', methods=['GET'])
 def get_message():
 	message = ""
-	with open('/opt/mycroft/skills/mycroft-momo/newMessage', 'r') as f:
+	with open('/opt/mycroft/skills/mycroft-momo/userMessage', 'r') as f:
 		message = f.read()
 	return message
 
