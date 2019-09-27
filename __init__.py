@@ -14,12 +14,10 @@ from mycroft.util.log import LOG
 import os
 import random
 
-def random_line(afile):
-    line = next(afile)
-    for num, aline in enumerate(afile, 2):
-        if random.randrange(num): continue
-        line = aline
-    return line
+def random_line(file):
+    with open(file) as f:
+        return random.choice(list(f))
+
 
 class MomoSkill(MycroftSkill):
 
@@ -52,18 +50,20 @@ class MomoSkill(MycroftSkill):
         with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
             f.truncate(0)
             f.write(message)
-
-    def showDialog(self, dialog):
-        with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
-            f.truncate(0)
-            f.write(dialog)
-
+    
     def getRandomDialogEntryOrTheText(self, dialogOrText):
         p = os.path.join("/opt/mycroft/skills/mycroft-momo/dialog/en-us/" + dialogOrText[:-4])
         if(os.path.exists(p)):
             return random_line(p)
         else:
             return dialogOrText
+
+    def showDialog(self, dialogOrText):
+        text = self.getRandomDialogEntryOrTheText(dialogOrText)
+        with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
+            f.truncate(0)
+            f.write(text)
+        return text
 
     def showAndSpeakDialog(self, dialog, waitForResponse=False):
         text = self.getRandomDialogEntryOrTheText(dialog)
@@ -82,18 +82,19 @@ class MomoSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
-        self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
-        self.username = self.get_user_response("names.small")
-        LOG.debug('My message: %s', "testMsg")
+        self.username = self.get_user_response("who.is.there")
+        self.showDialog("who.is.there")
+        
         if(self.username in self.userInterestsDict.keys()):
-            self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(self.username))
-            for interest in self.userInterestsDict[self.username]:
-                if(interest in self.eventInterest.keys()):
-                    self.showAndSpeakDialog("{}: {}".format(interest, self.eventInterest[interest]))
-            self.showAndSpeakDialog("What do you want to do?")
-        else:
-            self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(self.username))
-            self.showDialog("showSuggestedInterests123456")
+            utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
+            self.showDialog(utterance)
+        #     for interest in self.userInterestsDict[self.username]:
+        #         if(interest in self.eventInterest.keys()):
+        #             self.showAndSpeakDialog("{}: {}".format(interest, self.eventInterest[interest]))
+        #     self.showAndSpeakDialog("What do you want to do?")
+        # else:
+        #     self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(self.username))
+        #     self.showDialog("showSuggestedInterests123456")
             #self.userInterestsDict[username] = newUsersInterests
     
     # def stop(self):
