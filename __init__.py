@@ -11,8 +11,6 @@ from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler, Message
 from mycroft.util.log import LOG
 import os
-import sqlite3
-from sqlite3 import Error
 
 class MomoSkill(MycroftSkill):
 
@@ -34,34 +32,17 @@ class MomoSkill(MycroftSkill):
         }
     
     def initialize(self):  
-        self.add_event('recognizer_loop:wakeword', self.handle_hey_momo)
+        self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
-    def handle_hey_momo(self, message):
-        self.speak_dialog("placeBracelet")
-        print("Got this message: {}".format(message))
-
-        self.emitter.emit(Message("skill.Momo.test",  
-                              {'test': ["This is a test", "this too"],  
-                               'lang': 'en-us'})) 
-
+    def handle_utterance(self, data):
+      self.speak_dialog(data["utterances"][0])
+    
         #self.username = input("Please write your forename: ")
-        self.isUserKnown = False
-        for username in userInterestsDict.keys():
-            if message in username:
-                self.username = username
-                self.isUserKnown = True
-
-        if self.isUserKnown:
-            self.speak_dialog("Hi {}, these are your interests: {}".format(self.username, self.userInterestsDict[self.username]))
-        else:
-            #ask user for interests
-            self.speak_dialog("What are you interested in? Choose from the listed interests!")
-            # goto getInterestsIntent
-            # self.userInterestsDict[self.username] = 
+        
             
-    @intent_handler(IntentBuilder("").require("test.intent"))
+    @intent_handler(IntentBuilder("").require("hey.intent"))
     def handle_test_intent(self, message):
-        self.speak_dialog("test")
+        self.speak_dialog("placeBracelet")
 
     def stop(self):
         self.speak_dialog("stop")
