@@ -11,6 +11,14 @@ from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler, Message
 from mycroft.util.log import LOG
 import os
+import random
+
+def random_line(afile):
+    line = next(afile)
+    for num, aline in enumerate(afile, 2):
+      if random.randrange(num): continue
+      line = aline
+    return line
 
 class MomoSkill(MycroftSkill):
 
@@ -18,6 +26,7 @@ class MomoSkill(MycroftSkill):
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(MomoSkill, self).__init__(name="Momo")
+
         with open(os.path.join(os.path.dirname(__file__), "data/interests")) as f:
             self.interests = f.readlines()
          
@@ -41,21 +50,32 @@ class MomoSkill(MycroftSkill):
         with open('/opt/mycroft/skills/mycroft-momo/userMessage', 'a') as f:
             f.truncate(0)
             f.write(message)
-    
-    def showAndSpeakDialog(self, dialog):
+
+    def showDialog(self, dialog):
         with open('/opt/mycroft/skills/mycroft-momo/momoMessage', 'a') as f:
             f.truncate(0)
             f.write(dialog)
-        self.speak_dialog(dialog)
 
-            
+    def getRandomDialogEntryOrTheText(self, dialogOrText):
+        p = os.path.join("/opt/mycroft/skills/mycroft-momo/dialog/en-us/" + dialogOrText[:-4])
+        if(os.path.exists(p)):
+            return random_line(p)
+        else:
+            return dialogOrText
+
+    def showAndSpeakDialog(self, dialog):
+        text = getRandomDialogEntryOrTheText(dialog)
+        self.showDialog(text)
+        self.speak(text)
+
     @intent_handler(IntentBuilder("").require("hey.intent"))
-    def handle_test_intent(self, message):
-        self.showAndSpeakDialog("placeBracelet")
+    def handle_start_intent(self, message):
+        self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
 
-    def stop(self):
-        self.showAndSpeakDialog("stop")
-        return True
+
+    # def stop(self):
+    #     self.showAndSpeakDialog("stop")
+    #     return True
 
 # The "create_skill()" method is used to create an instance of the skill.
 # Note that it's outside the class itself.
