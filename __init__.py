@@ -95,6 +95,7 @@ class MomoSkill(MycroftSkill):
         # else:
         #     self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(self.username))
         #     self.showDialog("showSuggestedInterests123456")
+            
             #self.userInterestsDict[username] = newUsersInterests
     
     # def stop(self):
