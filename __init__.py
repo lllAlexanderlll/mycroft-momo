@@ -41,8 +41,8 @@ class MomoSkill(MycroftSkill):
         }
 
     
-    def initialize(self):  
-        self.add_event('recognizer_loop:utterance', self.handle_utterance)
+    # def initialize(self):  
+    #     self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
     # def handle_utterance(self, data):
     #     message = data.data["utterances"][0]
