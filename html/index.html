@@ -50,7 +50,7 @@
                     d="M614.457+1178.51C614.457+1178.51+642.504+1158.53+705.609+1178.16" fill="#ed2736"
                     stroke-linecap="round" opacity="1" stroke-linejoin="round" />
             </g>
-            <g class="rotating" id="rotating" vectornator:layerName="Layer 3">
+            <g class="" id="rotating" vectornator:layerName="Layer 3">
                 <path
                     d="M1188.85+410.294C1188.85+410.294+869.976+357.335+757.287+649.974C757.287+649.974+1112.12+526.001+1188.85+410.294Z"
                     opacity="0" fill="#ed2736" />
@@ -243,6 +243,7 @@
 
 
         function displayWaitingMessage() {
+            stopWingAnimation();
             $(".content").prepend(waitingBubble);
         }
 
@@ -273,6 +274,7 @@
         }
 
         function displayMessageFromMycroft(message) {
+            startWingAnimation();
             var newRow = document.createElement("div"),
                 newBubble = document.createElement("div"),
                 typedSpan = document.createElement("span"),
@@ -295,6 +297,7 @@
         }
 
         function displayMessageFromUser(message) {
+            stopWingAnimation();
             var newRow = document.createElement("div"),
                 newBubble = document.createElement("div"),
                 typedSpan = document.createElement("span"),
