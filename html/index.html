@@ -155,6 +155,8 @@
         <a href="#" onclick="deleteWaitingMessage()">Remove waiting</a>
         <a href="#" onclick="startWingAnimation()">StartWingAnimation</a>
         <a href="#" onclick="stopWingAnimation()">StopWingAnimation</a>
+        <a href="#" onclick="displayListOfInterests()">ShowList</a>
+
 
 
 
@@ -173,42 +175,11 @@
             </div>
         </div>
 
-        <div class="bubble right">
-            <div class="bubble-user bubble-general">
-                <!--Loading animation-->
-                <div class="lds-ripple">
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
 
-        <div class="bubble right faded">
-            <div class="bubble-green bubble-general">
-                <i class="fas fa-check"></i>
-            </div>
-        </div>
-        <div class="bubble left ">
-            <div class="interests">
-                <div class="header">Interests</div>
-                <ul>
-                    <li>Football</li>
-                    <li>Knitting</li>
-                    <li>Dogs</li>
-                    <li>Lol</li>
-                </ul>
-            </div>
+        
 
-        </div>
-        <div class="bubble right ">
-            <div class="bubble-green bubble-general">
-                <i class="fas fa-check"></i>
-            </div>
-        </div>
-        <div class="bubble right ">
-            <div class="bubble-user bubble-general">
-                <p>I like football</p>
-            </div>
+        <div class="gradient">
+
         </div>
     </div>
 
@@ -273,8 +244,50 @@
             $("#typed-strings").removeAttr('id');
         }
 
+        function displayListOfInterests() {
+            startWingAnimation();
+            var newRow = document.createElement("div"),
+                interestsDiv = document.createElement("div"),
+                headerDiv = document.createElement("div"),
+                list = document.createElement("ul"),
+                item = document.createElement("li"),
+                item2 = document.createElement("li"),
+                item3 = document.createElement("li"),
+                item4 = document.createElement("li"),
+                item5 = document.createElement("li"),
+                item6 = document.createElement("li");
+
+
+            newRow.classList.add("bubble");
+            newRow.classList.add("left");
+            interestsDiv.classList.add("interests");
+            headerDiv.innerHTML="Interests";
+            headerDiv.classList.add("header");
+            item.innerHTML="Football";
+            item2.innerHTML="Cooking";
+            item3.innerHTML="Cooking";
+            item4.innerHTML="Cooking";
+            item5.innerHTML="Cooking";
+            item6.innerHTML="Cooking";
+
+            list.appendChild(item);
+            list.appendChild(item2);
+            list.appendChild(item3);
+            list.appendChild(item4);
+            list.appendChild(item5);
+            list.appendChild(item6);
+            interestsDiv.appendChild(headerDiv);
+            interestsDiv.appendChild(list);
+            newRow.appendChild(interestsDiv);
+
+
+            $(".content").prepend(newRow);
+        }
+
         function displayMessageFromMycroft(message) {
             startWingAnimation();
+            $(".newMessage").removeClass("newMessage");
+
             var newRow = document.createElement("div"),
                 newBubble = document.createElement("div"),
                 typedSpan = document.createElement("span"),
@@ -284,6 +297,7 @@
             newRow.classList.add("left");
             newBubble.classList.add("bubble-momo");
             newBubble.classList.add("bubble-general");
+            newBubble.classList.add("newMessage");
             newText.id = "typed-strings";
             typedSpan.id = "typed";
             content.innerHTML = message;
@@ -297,6 +311,8 @@
         }
 
         function displayMessageFromUser(message) {
+            $(".newMessage").removeClass("newMessage");
+
             stopWingAnimation();
             var newRow = document.createElement("div"),
                 newBubble = document.createElement("div"),
@@ -307,6 +323,7 @@
             newRow.classList.add("right");
             newBubble.classList.add("bubble-user");
             newBubble.classList.add("bubble-general");
+            newBubble.classList.add("newMessage");
             newText.id = "typed-strings";
             typedSpan.id = "typed";
             content.innerHTML = message;

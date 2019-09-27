@@ -72,12 +72,24 @@ h2{
     top: 0;
     height: 100vh;
     overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.gradient{
+    height: 200px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 }
 
 
 div.interests{
     background-color: #563a7e;
-    width: 600px;
+    width: 700px;
     border-radius: 40px;
 
 }
@@ -108,15 +120,20 @@ ul li{
     font-weight: 600;
 }
 
+.bubble-general.newMessage{
+    opacity: 1;
+}
+
 .bubble-general{
     font-weight: 600;
-
+transition: opacity ease-in-out 0.3s;
     padding: 30px 50px 30px 50px;
     font-size: 35px;
     color: #262626    ;
         box-sizing: border-box;
     display: inline-block;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;
+    opacity: 1;    
 
 }
 
