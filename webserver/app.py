@@ -16,8 +16,6 @@ def get_message():
 	message = ""
 	with open('/opt/mycroft/skills/mycroft-momo/newMessage', 'r') as f:
 		message = f.read()
-	response = flask.Response(message)
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	return message
 
 if __name__ == '__main__':
