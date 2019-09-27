@@ -10,6 +10,7 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
+
 import os
 import random
 
@@ -69,7 +70,7 @@ class MomoSkill(MycroftSkill):
         self.showDialog(text)
         self.speak(text, waitForResponse)
 
-    def showAndSpeakDialogResponse(self, dialog, waitForResponse=False):
+    def showAndSpeakDialogResponse(self, dialog):
         text = self.getRandomDialogEntryOrTheText(dialog)
         self.showDialog(text)
         response = self.get_response(text)
@@ -81,8 +82,9 @@ class MomoSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
-        self.showAndSpeakDialogResponse("Hey! Do we know each other? What is your name?")
+        self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
         self.username = self.get_user_response("names.small")
+        LOG.debug('My message: %s', "testMsg")
         if(self.username in self.userInterestsDict.keys()):
             self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(self.username))
             for interest in self.userInterestsDict[self.username]:
