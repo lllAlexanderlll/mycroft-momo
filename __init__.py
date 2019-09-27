@@ -33,10 +33,11 @@ class MomoSkill(MycroftSkill):
             "Cooking": "Cooking class",
             "Walking": "Going to the park"
         }
-        app = Flask(__name__)
-        app.run(debug=True)
+
     
     def initialize(self):  
+        app = Flask(__name__)
+        app.run(debug=True)
         self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
     @app.route('/message', methods=['GET'])
