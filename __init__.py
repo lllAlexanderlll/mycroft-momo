@@ -68,7 +68,7 @@ class MomoSkill(MycroftSkill):
         self.showDialog(text)
         self.speak(text, waitForResponse)
 
-    @adds_context("usernameIsKnown")
+    
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
@@ -85,8 +85,7 @@ class MomoSkill(MycroftSkill):
             self.showDialog("showSuggestedInterests123456")
             #self.userInterestsDict[username] = newUsersInterests
     
-    @removes_context('usernameIsKnown')
-    @intent_handler(IntentBuilder(""))
+    @intent_handler(IntentBuilder("bla"))
     def handle_wouldYouLikeHelp_intent(self, message):
         pass
         
