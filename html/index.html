@@ -148,6 +148,10 @@
         </svg>
         <a href="#" onclick="displayMessageFromMycroft('hello')">Append</a>
         <a href="#" onclick="displayMessageFromUser('Oh I love you Momo')">Message from user</a>
+        <a href="#" onclick="displayWaitingMessage()">Waiting</a>
+        <a href="#" onclick="deleteWaitingMessage()">Remove waiting</a>
+
+
 
     </div>
     <div class="content">
@@ -196,12 +200,41 @@
 
     <script>
 
+        var waitingBubble = document.createElement("div"),
+            newBubble = document.createElement("div"),
+            typedSpan = document.createElement("span"),
+            newText = document.createElement("div");
+        emptyDiv = document.createElement("div");
+
+        waitingBubble.id = "waitingBubble";
+        content = document.createElement("p");
+        waitingBubble.classList.add("bubble");
+        waitingBubble.classList.add("right");
+        newBubble.classList.add("bubble-user");
+        newBubble.classList.add("bubble-general");
+        newText.classList.add("lds-ripple");
+        newText.appendChild(emptyDiv);
+        newText.appendChild(emptyDiv);
+        newBubble.appendChild(newText);
+        newBubble.appendChild(typedSpan);
+        waitingBubble.appendChild(newBubble);
+
         function displayMessage(type, message) {
             if (type === 1) {
                 displayMessageFromUser(message);
             } else if (type === 2) {
                 displayMessageFromMycroft(message);
             }
+        }
+
+
+        function displayWaitingMessage() {
+            $(".content").prepend(waitingBubble);
+        }
+
+        function deleteWaitingMessage() {
+            var elem = document.getElementById("waitingBubble");
+            return elem.parentNode.removeChild(elem);
         }
 
         function typeIt() {
