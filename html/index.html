@@ -274,17 +274,33 @@
 
     <script>
         $(document).ready(function() {
-            setInterval(ajaxd, 1000);
+            setInterval(ajaxdUser, 1000);
+            setInterval(ajaxdMomo, 1000);
         });
-        oldMessage = "";
-        function ajaxd() { 
+
+        
+        function ajaxdUser() { 
+            oldMessage = "";
             $.ajax({
-                url: "http://localhost:5000/message",
+                url: "http://localhost:5000/user/message",
                 type: 'GET',
                 success: function(message) {
                     if(oldMessage != message){
                         oldMessage = message;
                         displayMessageFromUser(message);
+                    }
+                }
+            });
+        }
+        function ajaxdMomo() { 
+            oldMessage = "";
+            $.ajax({
+                url: "http://localhost:5000/momo/message",
+                type: 'GET',
+                success: function(message) {
+                    if(oldMessage != message){
+                        oldMessage = message;
+                        displayMessageFromMycroft(message);
                     }
                 }
             });
