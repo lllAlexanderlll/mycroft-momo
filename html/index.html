@@ -278,28 +278,29 @@
             setInterval(ajaxdMomo, 1000);
         });
 
-        
+        oldMessageUser = "";
+        oldMessageMomo = "";
         function ajaxdUser() { 
-            oldMessage = "";
+            
             $.ajax({
                 url: "http://localhost:5000/user/message",
                 type: 'GET',
                 success: function(message) {
-                    if(oldMessage != message){
-                        oldMessage = message;
+                    if(oldMessageUser != message){
+                        oldMessageUser = message;
                         displayMessageFromUser(message);
                     }
                 }
             });
         }
         function ajaxdMomo() { 
-            oldMessage = "";
+            
             $.ajax({
                 url: "http://localhost:5000/momo/message",
                 type: 'GET',
                 success: function(message) {
-                    if(oldMessage != message){
-                        oldMessage = message;
+                    if(oldMessageMomo != message){
+                        oldMessageMomo = message;
                         displayMessageFromMycroft(message);
                     }
                 }
