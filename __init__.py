@@ -8,7 +8,7 @@
 # when the skill gets installed later by a user.
 
 from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill, intent_handler
+from mycroft.skills.core import MycroftSkill, intent_handler, Message
 from mycroft.util.log import LOG
 import os
 import sqlite3
@@ -39,8 +39,10 @@ class MomoSkill(MycroftSkill):
     def handle_hey_momo(self, message):
         self.speak_dialog("placeBracelet")
         print("Got this message: {}".format(message))
-        self.gui["time_string"] = "bla"
-        self.gui.show_page(os.path.join(os.path.dirname(__file__), "ui/clock_face.qml"))
+
+        self.emitter.emit(Message("skill.Momo.test",  
+                              {'test': ["This is a test", "this too"],  
+                               'lang': 'en-us'})) 
 
         #self.username = input("Please write your forename: ")
         self.isUserKnown = False
@@ -60,15 +62,6 @@ class MomoSkill(MycroftSkill):
     @intent_handler(IntentBuilder("").require("test.intent"))
     def handle_test_intent(self, message):
         self.speak_dialog("test")
-
-
-    # @intent_handler(IntentBuilder("").require("Count").require("Dir"))
-    # def handle_count_intent(self, message):
-    #     if message.data["Dir"] == "up":
-    #         self.count += 1
-    #     else:  # assume "down"
-    #         self.count -= 1
-    #     self.speak_dialog("count.is.now", data={"count": self.count})
 
     def stop(self):
         self.speak_dialog("stop")
