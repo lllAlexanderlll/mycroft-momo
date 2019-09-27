@@ -47,12 +47,12 @@ class MomoSkill(MycroftSkill):
     def handle_utterance(self, data):
         message = data.data["utterances"][0]
         self.speak_dialog(message)
-        with open('/opt/mycroft/skills/mycroft-momo/user/message', 'a') as f:
+        with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
             f.truncate(0)
             f.write(message)
 
     def showDialog(self, dialog):
-        with open('/opt/mycroft/skills/mycroft-momo/momo/message', 'a') as f:
+        with open('/opt/mycroft/skills/mycroft-momo/momo/messages/momoMessage', 'a') as f:
             f.truncate(0)
             f.write(dialog)
 
