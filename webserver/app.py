@@ -19,7 +19,7 @@ def get_user_message():
 	return message
 
 @app.route('/momo/message', methods=['GET'])
-def get_user_message():
+def get_momo_message():
 	message = ""
 	with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'r') as f:
 		message = f.read()
