@@ -82,7 +82,7 @@ class MomoSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
-        self.username = self.get_user_response("who.is.there")
+        self.username = self.get_user_response('who.is.there')
         self.showDialog("who.is.there")
         
         if(self.username in self.userInterestsDict.keys()):
