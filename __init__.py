@@ -43,7 +43,7 @@ class MomoSkill(MycroftSkill):
     def handle_utterance(self, data):
         message = data.data["utterances"][0]
         self.speak_dialog(message)
-        return jsonify({'message': message})
+        return message
         #self.username = input("Please write your forename: ")
         
             

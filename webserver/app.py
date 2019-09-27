@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/message', methods=['GET'])
 def get_tasks():
-    return "test" #jsonify({'message': "test"}) #TODO: how to get message
+    return "test"
 
 if __name__ == '__main__':
     app.run(debug=True)
