@@ -73,10 +73,9 @@ class MomoSkill(MycroftSkill):
     def handle_start_intent(self, message):
         self.showAndSpeakDialog("Hey! Do we know each other? What is your name?")
         username = self.get_response("test")
-        
-        if(username in userInterestsDict.keys()):
+        if(username in self.userInterestsDict.keys()):
             self.showAndSpeakDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(username))
-            for interest in userInterestsDict[username]:
+            for interest in self.userInterestsDict[username]:
                 if(interest in self.eventInterest.keys()):
                     self.showAndSpeakDialog("{}: {}".format(interest, self.eventInterest[interest]))
             self.showAndSpeakDialog("What do you want to do?")
