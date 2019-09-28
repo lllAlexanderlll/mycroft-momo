@@ -83,10 +83,25 @@ class MomoSkill(MycroftSkill):
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.username = self.get_user_response('who.is.there')
-        self.username = "Hans"
+        # self.username = "Hans"
         self.showDialog("Hey! Do we know each other? What is your name?")
         self.speak_dialog("welcome.back", data={"username" : self.username})
         self.showDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(self.username))
+        # Hey! Do we know each other? What is your name?
+        # Hans
+        # Thank you, Hans. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?
+        # Yes/ No
+        # Okay, to get started, please tell me some topics you are interested in. The following list can help you.
+        # List interests...
+        # I like card games, walking and reading
+        # Perfect. On the screen you can see events that could interest you.
+        # List events...
+        # Is there an event you would like to participate in?
+        # The canasta card game looks interesting
+        # Thank you! The Canasta card game is taking place in the common room at 5pm. Do you want to get reminded?
+        # Yes/ No
+        # I will keep you updated! You can always ask me for upcomming events.
+        
         #utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
         #self.showDialog(utterance)
 
