@@ -98,12 +98,13 @@ class MomoSkill(MycroftSkill):
                 interestsSentence = self.get_user_response("get.started")
                 
                 for interest in self.interests:
-                    if interest.lower() in interestsSentence:
+                    if interest.lower() in interestsSentence.lower():
                         if self.username in self.userInterestsDict:
                             self.userInterestsDict[self.username].append(interest.lower())
                         else:
                             self.userInterestsDict[self.username] = []
-                            
+                    else:
+                        self.speak("I could not understand your interests, sorry.")        
                 self.speak(", ".join(self.userInterestsDict[self.username]))
                 for interest in self.userInterestsDict[self.username]:
                     if(interest in self.eventInterest):
