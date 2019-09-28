@@ -93,8 +93,8 @@ class MomoSkill(MycroftSkill):
                     self.speak_dialog("user.events", data={"events": ', '.join(self.eventInterest[interest])})
         else:
             yesOrNo =self.get_user_response("user.intro", data={"username": self.username})
-            self.speak("you said: {}".format(yesOrNo))
-            if(yesOrNo is "yes" or yesOrNo is "yeah" or yesOrNo is "yah"):
+
+            if("yes" in yesOrNo or "yeah" in yesOrNo):
                 interestsSentence = self.get_user_response("get.started")
                 
                 for interests in self.interests:
