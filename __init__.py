@@ -32,13 +32,13 @@ class MomoSkill(MycroftSkill):
             self.interests = f.readlines()
          
         self.userInterestsDict = {
-            "Hans": ["Fishing", "Cooking", "Walking"],
-            "Sabine": ["Movies", "Gardening"]
+            "hans": ["fishing", "cooking", "walking"],
+            "sabine": ["movies", "gardening"]
         }
 
         self.eventInterest = {
-            "Cooking": ["Cooking class"],
-            "Walking": ["Going to the park", "Walking around the hospital"]
+            "cooking": ["cooking class"],
+            "walking": ["going to the park", "walking around the hospital"]
         }
 
     
@@ -98,9 +98,9 @@ class MomoSkill(MycroftSkill):
                 interestsSentence = self.get_user_response("get.started")
                 
                 for interest in self.interests:
-                    if(interest in interestsSentence):
-                        if(self.username in self.userInterestsDict):
-                            self.userInterestsDict[self.username].append(interest)
+                    if interest.lower() in interestsSentence:
+                        if self.username in self.userInterestsDict:
+                            self.userInterestsDict[self.username].append(interest.lower())
                         else:
                             self.userInterestsDict[self.username] = []
                             
