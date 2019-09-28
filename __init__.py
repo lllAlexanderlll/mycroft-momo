@@ -11,6 +11,7 @@ from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
 
+
 import os
 import random
 
@@ -89,12 +90,23 @@ class MomoSkill(MycroftSkill):
             self.speak_dialog("welcome.back", data={"username" : self.username})
             for interest in self.userInterestsDict[self.username]:
                 if(interest in self.eventInterest.keys()):
-                    self.speak_dialog("user.events", data={"events": ','.join(self.eventInterest[interest])})
+                    self.speak_dialog("user.events", data={"events": ', '.join(self.eventInterest[interest])})
         else:
             yesOrNo =self.get_user_response("user.intro", data={"username": self.username})
             self.speak("you said: {}".format(yesOrNo))
-            # if(yesOrNo === "yes")
-            # self.showDialog("showSuggestedInterests123456")
+            if(yesOrNo is "yes" or yesOrNo is "yeah" or yesOrNo is "yah"):
+                interestsSentence = self.get_user_response("get.started")
+                
+                for interests in self.interests:
+                    if(interest in interestsSentence):
+                        self.userInterestsDict.setdefault(self.username, []).append(interest)
+                for interest in self.userInterestsDict[self.username]:
+                    if(interest in self.eventInterest):
+                        events = ', '.join(self.eventInterest[interest])
+                self.speak("Perfect. Here are some events that could interest you: {}".format(events))
+            else:
+                self.speak("That is okay. Just speak to me again, when you are ready.")
+            
             
             #self.userInterestsDict[username] = newUsersInterests
     
