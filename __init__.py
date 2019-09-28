@@ -41,8 +41,8 @@ class MomoSkill(MycroftSkill):
         }
 
     
-    def initialize(self):  
-        self.add_event('recognizer_loop:utterance', self.handle_utterance)
+    # def initialize(self):  
+    #     self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
     def handle_utterance(self, data):
         message = data.data["utterances"][0]
@@ -76,30 +76,25 @@ class MomoSkill(MycroftSkill):
     #     response = self.get_response(text)
     #     return response
 
-    def get_user_response(self, dialog):
-        response = self.get_response(dialog)
+    def get_user_response(self, dialog, data=None):
+        response = self.get_response(dialog, data)
         return response
 
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.username = self.get_user_response('who.is.there')
-        self.username = "Hans"
-        self.showDialog("Hey! Do we know each other? What is your name?")
-        self.speak_dialog("welcome.back", data={"username" : self.username})
-        self.showDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(self.username))
-        #utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
-        #self.showDialog(utterance)
-
-        # if(self.username in self.userInterestsDict.keys()):
-        #     utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
-        #     self.showDialog(utterance)
-        #     for interest in self.userInterestsDict[self.username]:
-        #         if(interest in self.eventInterest.keys()):
-        #             self.showAndSpeakDialog("{}: {}".format(interest, self.eventInterest[interest]))
-        #     self.showAndSpeakDialog("What do you want to do?")
-        # else:
-        #     self.showAndSpeakDialog("Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(self.username))
-        #     self.showDialog("showSuggestedInterests123456")
+        
+        
+        if(self.username in self.userInterestsDict.keys()):
+            self.speak_dialog("welcome.back", data={"username" : self.username})
+            for interest in self.userInterestsDict[self.username]:
+                if(interest in self.eventInterest.keys()):
+                    self.speak_dialog("user.events", data={"events": ','.join(self.eventInterest[interest])})
+        else:
+            yesOrNo =self.get_user_response("user.intro", data={"username": self.username})
+            self.speak("you said: {}".format(yesOrNo))
+            # if(yesOrNo === "yes")
+            # self.showDialog("showSuggestedInterests123456")
             
             #self.userInterestsDict[username] = newUsersInterests
     
