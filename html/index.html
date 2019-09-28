@@ -263,19 +263,59 @@
             interestsDiv.classList.add("interests");
             headerDiv.innerHTML="Interests";
             headerDiv.classList.add("header");
-            item.innerHTML="Football";
+            item.innerHTML="Walking";
             item2.innerHTML="Cooking";
-            item3.innerHTML="Cooking";
-            item4.innerHTML="Cooking";
-            item5.innerHTML="Cooking";
-            item6.innerHTML="Cooking";
+            item3.innerHTML="Card games";
+            //item4.innerHTML="Painting";
+            item5.innerHTML="Reading";
+            item6.innerHTML="Movies";
 
             list.appendChild(item);
             list.appendChild(item2);
-            list.appendChild(item3);
-            list.appendChild(item4);
-            list.appendChild(item5);
             list.appendChild(item6);
+            // list.appendChild(item4);
+            list.appendChild(item5);
+            list.appendChild(item3);
+            interestsDiv.appendChild(headerDiv);
+            interestsDiv.appendChild(list);
+            newRow.appendChild(interestsDiv);
+
+
+            $(".content").prepend(newRow);
+        }
+
+        function displayListOfEvents() {
+            startWingAnimation();
+            var newRow = document.createElement("div"),
+                interestsDiv = document.createElement("div"),
+                headerDiv = document.createElement("div"),
+                list = document.createElement("ul"),
+                item = document.createElement("li"),
+                item2 = document.createElement("li"),
+                item3 = document.createElement("li"),
+                item4 = document.createElement("li"),
+                item5 = document.createElement("li"),
+                item6 = document.createElement("li");
+
+
+            newRow.classList.add("bubble");
+            newRow.classList.add("left");
+            interestsDiv.classList.add("interests");
+            headerDiv.innerHTML="Events";
+            headerDiv.classList.add("header");
+            item.innerHTML="Canasta card game";
+            item2.innerHTML="Walking club";
+            // item3.innerHTML="Card games";
+            // //item4.innerHTML="Painting";
+            // item5.innerHTML="Reading";
+            // item6.innerHTML="Movies";
+
+            list.appendChild(item);
+            list.appendChild(item2);
+            // list.appendChild(item6);
+            // // list.appendChild(item4);
+            // list.appendChild(item5);
+            // list.appendChild(item3);
             interestsDiv.appendChild(headerDiv);
             interestsDiv.appendChild(list);
             newRow.appendChild(interestsDiv);
@@ -347,13 +387,92 @@
 
         });
     </script>
-
     <script>
-        $(document).ready(function() {
-            setInterval(ajaxdUser, 1000);
-            setInterval(ajaxdMomo, 1000);
-        });
+        
 
+        $(document).ready(function() {
+            //setInterval(ajaxdUser, 1000);
+            //setInterval(ajaxdMomo, 1000);
+            function say(m) {
+                var msg = new SpeechSynthesisUtterance();
+                var voices = window.speechSynthesis.getVoices();
+                msg.voice = voices[10];
+                msg.voiceURI = "native";
+                msg.volume = 1;
+                msg.rate = 1;
+                msg.pitch = 0.8;
+                msg.text = m;
+                msg.lang = 'en-US';
+                speechSynthesis.speak(msg);
+            }
+
+            say("Hello world");
+
+            var time = 5000;
+            setTimeout(function() {
+                displayMessageFromUser("Hey Momo");
+                say("Hey Momo");
+            }, time);
+            time += 3000;
+            setTimeout(function() {
+                displayMessageFromMycroft("Hey! Do we know each other? What is your name?");
+            }, time);
+            time += 5000;
+            setTimeout(function() {
+                displayMessageFromUser("Hans");
+            }, time);
+            time += 4000;
+            setTimeout(function() {
+                displayMessageFromMycroft("Thank you, Hans. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?");
+            }, time);
+            time += 10000;
+            setTimeout(function() {
+                displayMessageFromUser("Yes");
+            }, time);
+            time += 3000;
+            setTimeout(function() {
+                displayMessageFromMycroft("Okay, to get started, please tell me some topics you are interested in. The following list can help you.");
+            }, time);
+            time += 10000;
+            setTimeout(function() {
+                displayListOfInterests();
+            }, time);
+            time += 8000;
+            setTimeout(function() {
+                displayMessageFromUser("I like card games, walking and reading");
+            }, time);
+            time += 6000;
+            setTimeout(function() {
+                displayMessageFromMycroft("Perfect. On the screen you can see events that could interest you.");
+            }, time);
+            time += 6000;
+            setTimeout(function() {
+                displayListOfEvents();
+            }, time);
+            time += 4000;
+            setTimeout(function() {
+                displayMessageFromMycroft("Is there an event you would like to participate in?");
+            }, time);
+            time += 7000;
+            setTimeout(function() {
+                displayMessageFromUser("The canasta card game looks interesting");
+            }, time);
+            time += 5000;
+            setTimeout(function() {
+                displayMessageFromMycroft("Thank you! The Canasta card game is taking place in the common room at 5pm. Do you want to get reminded?");
+            }, time);
+            time += 6000;
+            setTimeout(function() {
+                displayMessageFromUser("Yes please");
+            }, time);
+            time += 5000;
+            setTimeout(function() {
+                displayMessageFromMycroft("I will keep you updated! You can always ask me for upcomming events.");
+            }, time);
+
+            
+
+        });
         oldMessageUser = "";
         oldMessageMomo = "";
         function ajaxdUser() { 
