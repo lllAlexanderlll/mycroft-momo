@@ -99,9 +99,7 @@ class MomoSkill(MycroftSkill):
                 if not self.username in self.userInterestsDict:
                     self.userInterestsDict[self.username] = []
                     
-                for interest in self.interests:
-                    if interest.lower() in interestsSentence.lower():
-                            self.userInterestsDict[self.username].append(interest.lower())
+                self.userInterestsDict[self.username].append(interestsSentence.lower())
                 
                 if len(self.userInterestsDict[self.username]) == 0:
                         self.speak("I could not understand your interests, sorry.")
