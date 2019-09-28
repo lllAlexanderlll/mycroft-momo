@@ -149,6 +149,7 @@
         <h1>MoMo the Friend Seeker</h1>
         <h2>VIVA2019</h2>
         <p></p>
+        <div class="hidden">
         <a href="#" onclick="displayMessageFromMycroft('hello')">Append</a>
         <a href="#" onclick="displayMessageFromUser('Oh I love you Momo')">Message from user</a>
         <a href="#" onclick="displayWaitingMessage()">Waiting</a>
@@ -156,7 +157,7 @@
         <a href="#" onclick="startWingAnimation()">StartWingAnimation</a>
         <a href="#" onclick="stopWingAnimation()">StopWingAnimation</a>
         <a href="#" onclick="displayListOfInterests()">ShowList</a>
-
+        </div>
 
 
 
@@ -184,6 +185,12 @@
     </div>
 
     <script>
+       // var audio1 = new Audio('./voice/01_momo.mp3');
+       // var audio2 = new Audio('./voice/02_sayMomo.mp3');
+       // var audio3 = new Audio('./voice/03_name.mp3');
+       // var audio4 = new Audio('./voice/04_interests.mp3');
+       // var audio5 = new Audio('./voice/02_sayMomo.mp3');
+
 
         var waitingBubble = document.createElement("div"),
             newBubble = document.createElement("div"),
@@ -396,7 +403,7 @@
             function say(m) {
                 var msg = new SpeechSynthesisUtterance();
                 var voices = window.speechSynthesis.getVoices();
-                msg.voice = voices[10];
+                msg.voice = voices[0];
                 msg.voiceURI = "native";
                 msg.volume = 1;
                 msg.rate = 1;
@@ -405,32 +412,41 @@
                 msg.lang = 'en-US';
                 speechSynthesis.speak(msg);
             }
+            startWingAnimation();
+            say("Hey, I am Momo! Say Hey Momo to talk with me!");
 
-            say("Hello world");
 
-            var time = 5000;
+            var time = 6000;
             setTimeout(function() {
                 displayMessageFromUser("Hey Momo");
-                say("Hey Momo");
             }, time);
-            time += 3000;
+            time += 5000;
             setTimeout(function() {
+                startWingAnimation();
+                say("Hey! Do we know each other? What is your name?");
                 displayMessageFromMycroft("Hey! Do we know each other? What is your name?");
             }, time);
             time += 5000;
             setTimeout(function() {
+                stopWingAnimation();
                 displayMessageFromUser("Hans");
             }, time);
-            time += 4000;
+            time += 9000;
             setTimeout(function() {
+                startWingAnimation();
+                say("Thank you, Hans. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?");
+
                 displayMessageFromMycroft("Thank you, Hans. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?");
             }, time);
             time += 10000;
             setTimeout(function() {
+                stopWingAnimation();
                 displayMessageFromUser("Yes");
             }, time);
             time += 3000;
             setTimeout(function() {
+                startWingAnimation();
+                say("Okay, to get started, please tell me some topics you are interested in. The following list can help you.");
                 displayMessageFromMycroft("Okay, to get started, please tell me some topics you are interested in. The following list can help you.");
             }, time);
             time += 10000;
@@ -439,10 +455,13 @@
             }, time);
             time += 8000;
             setTimeout(function() {
+                stopWingAnimation();
                 displayMessageFromUser("I like card games, walking and reading");
             }, time);
             time += 6000;
             setTimeout(function() {
+                startWingAnimation();
+                say("Perfect. On the screen you can see events that could interest you.");
                 displayMessageFromMycroft("Perfect. On the screen you can see events that could interest you.");
             }, time);
             time += 6000;
@@ -451,22 +470,29 @@
             }, time);
             time += 4000;
             setTimeout(function() {
+                say("Is there an event you would like to participate in?");
                 displayMessageFromMycroft("Is there an event you would like to participate in?");
             }, time);
             time += 7000;
             setTimeout(function() {
+                stopWingAnimation();
                 displayMessageFromUser("The canasta card game looks interesting");
             }, time);
             time += 5000;
             setTimeout(function() {
+                startWingAnimation();
+                say("Thank you! The Canasta card game is taking place in the common room at 5pm. Do you want to get reminded?");
                 displayMessageFromMycroft("Thank you! The Canasta card game is taking place in the common room at 5pm. Do you want to get reminded?");
             }, time);
             time += 10000;
             setTimeout(function() {
+                stopWingAnimation();
                 displayMessageFromUser("Yes please");
             }, time);
             time += 5000;
             setTimeout(function() {
+                startWingAnimation();
+                say("I will keep you updated! You can always ask me for upcomming events.");
                 displayMessageFromMycroft("I will keep you updated! You can always ask me for upcomming events.");
             }, time);
 
