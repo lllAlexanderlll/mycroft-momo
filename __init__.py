@@ -99,7 +99,11 @@ class MomoSkill(MycroftSkill):
                 
                 for interest in self.interests:
                     if(interest in interestsSentence):
-                        self.userInterestsDict.setdefault(self.username, []).append(interest)
+                        if(self.username not in self.userInterestsDict):
+                            self.userInterestsDict[self.username] = []
+                        else:
+                            self.userInterestsDict[self.username].append(interest)
+
                 for interest in self.userInterestsDict[self.username]:
                     if(interest in self.eventInterest):
                         events = ', '.join(self.eventInterest[interest])
