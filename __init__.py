@@ -32,7 +32,7 @@ class MomoSkill(MycroftSkill):
          
         self.userInterestsDict = {
             "Hans": ["Fishing", "Cooking", "Walking"],
-            "Maria": ["Movies", "Gardening"]
+            "Sabine": ["Movies", "Gardening"]
         }
 
         self.eventInterest = {
@@ -41,15 +41,15 @@ class MomoSkill(MycroftSkill):
         }
 
     
-    # def initialize(self):  
-    #     self.add_event('recognizer_loop:utterance', self.handle_utterance)
+    def initialize(self):  
+        self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
-    # def handle_utterance(self, data):
-    #     message = data.data["utterances"][0]
-    #     self.speak_dialog(message)
-    #     with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
-    #         f.truncate(0)
-    #         f.write(message)
+    def handle_utterance(self, data):
+        message = data.data["utterances"][0]
+        self.speak_dialog(message)
+        with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
+            f.truncate(0)
+            f.write(message)
     
     # def getRandomDialogEntryOrTheText(self, dialogOrText):
     #     p = os.path.join("/opt/mycroft/skills/mycroft-momo/dialog/en-us/" + dialogOrText[:-4])
@@ -58,12 +58,12 @@ class MomoSkill(MycroftSkill):
     #     else:
     #         return dialogOrText
 
-    # def showDialog(self, dialogOrText):
-    #     text = self.getRandomDialogEntryOrTheText(dialogOrText)
-    #     with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
-    #         f.truncate(0)
-    #         f.write(text)
-    #     return text
+    def showDialog(self, dialogOrText):
+        #text = self.getRandomDialogEntryOrTheText(dialogOrText)
+        with open('/opt/mycroft/skills/mycroft-momo/messages/momoMessage', 'a') as f:
+            f.truncate(0)
+            f.write(dialogOrText)
+        return dialogOrText
 
     # def showAndSpeakDialog(self, dialog, waitForResponse=False):
     #     text = self.getRandomDialogEntryOrTheText(dialog)
@@ -83,10 +83,12 @@ class MomoSkill(MycroftSkill):
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
         self.username = self.get_user_response('who.is.there')
-        # self.showDialog("who.is.there")
-        # self.speak_dialog("welcome.back", data={"username" : self.username})
-        # utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
-        # self.showDialog(utterance)
+        self.username = "Hans"
+        self.showDialog("Hey! Do we know each other? What is your name?")
+        self.speak_dialog("welcome.back", data={"username" : self.username})
+        self.showDialog("Welcome back {}. Here is a list of your interests and events you have signed up for.".format(self.username))
+        #utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
+        #self.showDialog(utterance)
 
         # if(self.username in self.userInterestsDict.keys()):
         #     utterance = self.dialog_renderer.render("welcome.back", data={"username" : self.username})
