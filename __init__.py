@@ -94,7 +94,7 @@ class MomoSkill(MycroftSkill):
         else:
             yesOrNo = self.get_user_response("user.intro", data={"username": self.username})
 
-            if(yesOrNo is "yes"):
+            if(yesOrNo == "yes"):
                 interestsSentence = self.get_user_response("get.started")
                 
                 for interest in self.interests:
