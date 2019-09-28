@@ -97,13 +97,16 @@ class MomoSkill(MycroftSkill):
             if("yes" in yesOrNo or "yeah" in yesOrNo):
                 interestsSentence = self.get_user_response("get.started")
                 
-                for interests in self.interests:
+                for interest in self.interests:
                     if(interest in interestsSentence):
                         self.userInterestsDict.setdefault(self.username, []).append(interest)
                 for interest in self.userInterestsDict[self.username]:
                     if(interest in self.eventInterest):
                         events = ', '.join(self.eventInterest[interest])
-                self.speak("Perfect. Here are some events that could interest you: {}".format(events))
+                if len(events) is 0:
+                    self.speak("Sorry, there are currently no events for this topic. Please ask later again.")
+                else:
+                    self.speak("Perfect. Here are some events that could interest you: {}".format(events))
             else:
                 self.speak("That is okay. Just speak to me again, when you are ready.")
             
