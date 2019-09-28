@@ -15,6 +15,10 @@ html {
     src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
 }
 
+.hidden{
+    display: none;
+}
+
 body{
     font-size: 16pt;
     padding: 0;

@@ -149,14 +149,15 @@
         <h1>MoMo the Friend Seeker</h1>
         <h2>VIVA2019</h2>
         <p></p>
-        <a href="#" onclick="displayMessageFromMycroft('hello')">Append</a>
-        <a href="#" onclick="displayMessageFromUser('Oh I love you Momo')">Message from user</a>
-        <a href="#" onclick="displayWaitingMessage()">Waiting</a>
-        <a href="#" onclick="deleteWaitingMessage()">Remove waiting</a>
-        <a href="#" onclick="startWingAnimation()">StartWingAnimation</a>
-        <a href="#" onclick="stopWingAnimation()">StopWingAnimation</a>
-        <a href="#" onclick="displayListOfInterests()">ShowList</a>
-
+        <div class="hidden">
+            <a href="#" onclick="displayMessageFromMycroft('hello')">Append</a>
+            <a href="#" onclick="displayMessageFromUser('Oh I love you Momo')">Message from user</a>
+            <a href="#" onclick="displayWaitingMessage()">Waiting</a>
+            <a href="#" onclick="deleteWaitingMessage()">Remove waiting</a>
+            <a href="#" onclick="startWingAnimation()">StartWingAnimation</a>
+            <a href="#" onclick="stopWingAnimation()">StopWingAnimation</a>
+            <a href="#" onclick="displayListOfInterests()">ShowList</a>
+        </div>
 
 
 
@@ -176,7 +177,7 @@
         </div>
 
 
-        
+
 
         <div class="gradient">
 
@@ -261,14 +262,14 @@
             newRow.classList.add("bubble");
             newRow.classList.add("left");
             interestsDiv.classList.add("interests");
-            headerDiv.innerHTML="Interests";
+            headerDiv.innerHTML = "Interests";
             headerDiv.classList.add("header");
-            item.innerHTML="Football";
-            item2.innerHTML="Cooking";
-            item3.innerHTML="Cooking";
-            item4.innerHTML="Cooking";
-            item5.innerHTML="Cooking";
-            item6.innerHTML="Cooking";
+            item.innerHTML = "Football";
+            item2.innerHTML = "Cooking";
+            item3.innerHTML = "Cooking";
+            item4.innerHTML = "Cooking";
+            item5.innerHTML = "Cooking";
+            item6.innerHTML = "Cooking";
 
             list.appendChild(item);
             list.appendChild(item2);
@@ -348,7 +349,13 @@
     </script>
 
     <script>
-        $(document).change(function () {
+        $(document).ready(function () {
+            displayMessageFromMycroft("Hello, I'm Momo! Say 'Hello Momo' to activate me.");
+            displayMessageFromUser("Hey Momo");
+            displayMessageFromMycroft("Hello! I'm here to connect you with fellow patients. Please, tell me your name.");
+            displayMessageFromUser("I'm Hans");
+            displayMessageFromMycroft("Hello, Hans! Do you want to tell me what are your interests?");
+
 
         });
     </script>
