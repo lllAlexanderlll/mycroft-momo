@@ -45,9 +45,10 @@ class MomoSkill(MycroftSkill):
     # def initialize(self):  
     #     self.add_event('recognizer_loop:utterance', self.handle_utterance)
 
-    def handle_utterance(self, data):
-        message = data.data["utterances"][0]
-        self.speak_dialog(message)
+    # def handle_utterance(self, data):
+    #     message = data.data["utterances"][0]
+    #     self.speakAndWrite_dialog(message)
+    def showUserMessage(self, message):
         with open('/opt/mycroft/skills/mycroft-momo/messages/userMessage', 'a') as f:
             f.truncate(0)
             f.write(message)
@@ -69,7 +70,11 @@ class MomoSkill(MycroftSkill):
     # def showAndSpeakDialog(self, dialog, waitForResponse=False):
     #     text = self.getRandomDialogEntryOrTheText(dialog)
     #     self.showDialog(text)
-    #     self.speak(text, waitForResponse)
+    #     self.speakAndWrite(text, waitForResponse)
+
+    def speakAndWrite(self, text):
+        self.speak(text)
+        self.showDialog(text)
 
     # def showAndSpeakDialogResponse(self, dialog):
     #     text = self.getRandomDialogEntryOrTheText(dialog)
@@ -83,38 +88,48 @@ class MomoSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("heyIntent").require("hey.intent"))
     def handle_start_intent(self, message):
-        self.username = self.get_user_response('who.is.there')
+        speech0 = "Hey! Do we know each other? What is your name?"
+        self.username = self.get_user_response(speech0)
+        self.showUserMessage(self.username)
         
         
         if(self.username in self.userInterestsDict.keys()):
-            self.speak_dialog("welcome.back", data={"username" : self.username})
+            speech1 = "Welcome back {}.".format(self.username)
+            self.speakAndWrite(speech1)
             for interest in self.userInterestsDict[self.username]:
                 if(interest in self.eventInterest.keys()):
-                    self.speak_dialog("user.events", data={"events": ', '.join(self.eventInterest[interest])})
+                    speech2 = "Here are some events that could interest you: {}".format(', '.join(self.eventInterest[interest]))
+                    self.speakAndWrite(speech2)
+                        
         else:
-            yesOrNo = self.get_user_response("user.intro", data={"username": self.username})
+            speech3 = "Thank you, {}. I want to help you to connect to other people with similar interests in the hospital. Would you like to do that?".format(self.username)
+            yesOrNo = self.get_user_response(speech3)
 
             if(yesOrNo == "yes"):
-                interestsSentence = self.get_user_response("get.started")
+                speech4 = "Okay, to get started, please tell me some topics you are interested in. The following list can help you: Walking, Card games, Reading, Music, Cooking"
+                interestsSentence = self.get_user_response(speech4)
+                self.showUserMessage(interestsSentence)
                 if not self.username in self.userInterestsDict:
                     self.userInterestsDict[self.username] = []
                     
                 self.userInterestsDict[self.username].append(interestsSentence.lower())
                 
                 if len(self.userInterestsDict[self.username]) == 0:
-                        self.speak("I could not understand your interests, sorry.")
-                        return
+                    speech5 = "I could not understand your interests, sorry."
+                    self.speakAndWrite(speech5)
+                    return
 
-                self.speak(", ".join(self.userInterestsDict[self.username]))
+                speech6 = ", ".join(self.userInterestsDict[self.username])
+                self.speakAndWrite(speech6)
                 for interest in self.userInterestsDict[self.username]:
                     if(interest in self.eventInterest):
                         events = ', '.join(self.eventInterest[interest])
                 if len(events) is 0:
-                    self.speak("Sorry, there are currently no events for this topic. Please ask later again.")
+                    self.speakAndWrite("Sorry, there are currently no events for this topic. Please ask later again.")
                 else:
-                    self.speak("Perfect. Here are some events that could interest you: {}".format(events))
+                    self.speakAndWrite("Perfect. Here are some events that could interest you: {}".format(events))
             else:
-                self.speak("That is okay. Just speak to me again, when you are ready.")
+                self.speakAndWrite("That is okay. Just speak to me again, when you are ready.")
             
             
             #self.userInterestsDict[username] = newUsersInterests
